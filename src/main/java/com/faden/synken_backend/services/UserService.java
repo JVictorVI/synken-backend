@@ -39,13 +39,13 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponseDTO updateUser(UUID id, UserRegisterDTO userRegisterDTO) {
+    public UserResponseDTO updateUser(UUID id, UserResponseDTO userResponseDTO) {
 
         LocalDateTime currentDate = LocalDateTime.now();
 
         User userTobeUpdated = getUser(id);
 
-        BeanUtils.copyProperties(userRegisterDTO, userTobeUpdated);
+        BeanUtils.copyProperties(userResponseDTO, userTobeUpdated);
         userTobeUpdated.setUpdatedAt(currentDate);
 
         User updatedUser = userRepository.save(userTobeUpdated);
