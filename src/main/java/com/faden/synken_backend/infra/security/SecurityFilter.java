@@ -22,7 +22,7 @@ import java.util.Collections;
 public class SecurityFilter extends OncePerRequestFilter {
 
     @Autowired
-    TokenService  tokenService;
+    TokenService tokenService;
 
     @Autowired
     UserRepository userRepository;
