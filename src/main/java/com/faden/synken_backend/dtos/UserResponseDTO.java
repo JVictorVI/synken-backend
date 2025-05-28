@@ -8,7 +8,7 @@ import java.util.UUID;
 public record UserResponseDTO
 
         (
-                UUID idUser,
+                //UUID idUser,
                 String name,
                 String username,
                 String email,
@@ -20,7 +20,7 @@ public record UserResponseDTO
     public UserResponseDTO(User user) {
 
         this (
-                user.getIdUser(),
+                //user.getIdUser(),
                 user.getName(),
                 user.getUsername(),
                 user.getEmail(),

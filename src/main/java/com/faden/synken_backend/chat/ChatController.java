@@ -1,40 +1,29 @@
 package com.faden.synken_backend.chat;
 
-import com.faden.synken_backend.models.User;
+import com.faden.synken_backend.dtos.ChatResponseDTO;
+import com.faden.synken_backend.dtos.PostResponseDTO;
+import com.faden.synken_backend.models.Chat;
+import com.faden.synken_backend.repositories.ChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.messaging.simp.annotation.SendToUser;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-@Controller
+@RestController
 public class ChatController {
 
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-        return chatMessage;
-    }
-
     @Autowired
-    private SimpMessagingTemplate messagingTemplate;
+    ChatRepository chatRepository;
 
-
-    @MessageMapping("/chat.sendPrivatePublic") // endpoint para envio de msg privada pública
-    public void sendPrivatePublicMessage(@Payload ChatMessage message) {
-        System.out.println("Enviando para tópico: /topic/private." + message.getRecipient());
-        System.out.println("Mensagem: " + message.getContent());
-
-        // Envia mensagem para tópico público "privado" do destinatário
-        messagingTemplate.convertAndSend(
-                "/topic/private." + message.getRecipient(),
-                message
-        );
+    @GetMapping("/chats/{id}")
+    ResponseEntity<List<ChatResponseDTO>> getAllChatsFromUser(@PathVariable(value = "id") UUID id) {
+        List<Chat> foundChats = chatRepository.findAllChatsFromUser(id);
+        return ResponseEntity.ok(foundChats.stream().map(chat -> new ChatResponseDTO(chat)).toList());
     }
-
 
 }

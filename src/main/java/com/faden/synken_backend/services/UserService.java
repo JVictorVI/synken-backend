@@ -25,6 +25,12 @@ public class UserService {
                 orElseThrow(() -> new UserNotFoundException("Usuário não encontrado via ID: " + id));
     }
 
+    private User getUserID(String userName) {
+        return userRepository.findByUsername(userName).
+                orElseThrow(() -> new UserNotFoundException("Usuário não encontrado via username: " + userName));
+    }
+
+
     @Transactional
     public UserResponseDTO createUser(UserRegisterDTO userRegisterDTO) {
 
@@ -39,11 +45,11 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponseDTO updateUser(UUID id, UserResponseDTO userResponseDTO) {
+    public UserResponseDTO updateUser(String userName, UserResponseDTO userResponseDTO) {
 
         LocalDateTime currentDate = LocalDateTime.now();
 
-        User userTobeUpdated = getUser(id);
+        User userTobeUpdated = getUserID(userName);
 
         BeanUtils.copyProperties(userResponseDTO, userTobeUpdated);
         userTobeUpdated.setUpdatedAt(currentDate);

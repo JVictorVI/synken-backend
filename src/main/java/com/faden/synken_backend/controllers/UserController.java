@@ -25,10 +25,10 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
-    @PutMapping("/user/update/{id}")
-    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable(value = "id") UUID id, @RequestBody @Valid UserResponseDTO userResponseDTO) {
+    @PutMapping("/user/update/{username}")
+    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable(value = "username") String username, @RequestBody @Valid UserResponseDTO userResponseDTO) {
 
-        UserResponseDTO updatedUser = userService.updateUser(id, userResponseDTO);
+        UserResponseDTO updatedUser = userService.updateUser(username, userResponseDTO);
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 
