@@ -44,7 +44,7 @@ public class MessageService {
         User receiver = userRepository.findByUsername(message.receiverUsername()).
                 orElseThrow(() -> new UsernameNotFoundException("Username não encontrado"));
 
-        Chat chat = chatRepository.findChatByUsers(sender.getIdUser(), receiver.getIdUser())
+        Chat chat = chatRepository.findChatWithUsers(sender.getIdUser(), receiver.getIdUser())
                 .orElseGet(() -> {
                     Chat newChat = new Chat();
                     newChat.setUser1(sender);
