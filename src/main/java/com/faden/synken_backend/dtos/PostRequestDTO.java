@@ -6,8 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record PostRequestDTO (
-    //UUID idUser,
-    @NotNull String userName,
-    @NotBlank String content,
+    String username,
+    String content,
     String imgPost
 ) {}

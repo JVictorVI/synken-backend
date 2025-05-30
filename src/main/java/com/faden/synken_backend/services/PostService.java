@@ -37,8 +37,8 @@ public class PostService {
 
         LocalDateTime currentDate = LocalDateTime.now();
 
-        User foundUser = userRepository.findByUsername(postRequestDTO.userName()).
-                orElseThrow(() -> new UserNotFoundException("Usuário não encontrado: " + postRequestDTO.userName()));
+        User foundUser = userRepository.findByUsername(postRequestDTO.username()).
+                orElseThrow(() -> new UserNotFoundException("Usuário não encontrado: " + postRequestDTO.username()));
 
         Post newPost = new Post();
 

@@ -40,6 +40,8 @@ public class Message implements Serializable {
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
+    @Column(name = "content", columnDefinition = "TEXT")
     private String content;
+
     private LocalDateTime createdAt;
 }

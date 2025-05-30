@@ -11,7 +11,6 @@ public record UserResponseDTO
                 UUID id,
                 String name,
                 String username,
-                String email,
                 String profilePicture,
                 LocalDateTime createdAt,
                 LocalDateTime updatedAt
@@ -23,7 +22,6 @@ public record UserResponseDTO
                 user.getIdUser(),
                 user.getName(),
                 user.getUsername(),
-                user.getEmail(),
                 user.getProfilePicture(),
                 user.getCreatedAt(),
                 user.getUpdatedAt()
