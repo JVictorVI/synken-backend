@@ -42,6 +42,6 @@ public class User implements Serializable {
 
     // Um usuário terá vários posts
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Post> posts = new HashSet<>(); //user terá uma série de posts
 }

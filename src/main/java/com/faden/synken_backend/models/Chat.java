@@ -38,7 +38,7 @@ public class Chat implements Serializable {
     private User user2;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "chat", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "chat", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Message> messages = new ArrayList<>();
 
     private LocalDateTime createdAt;

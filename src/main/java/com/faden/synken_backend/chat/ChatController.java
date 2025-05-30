@@ -1,7 +1,6 @@
 package com.faden.synken_backend.chat;
 
 import com.faden.synken_backend.dtos.ChatResponseDTO;
-import com.faden.synken_backend.dtos.PostResponseDTO;
 import com.faden.synken_backend.models.Chat;
 import com.faden.synken_backend.models.User;
 import com.faden.synken_backend.repositories.ChatRepository;
@@ -39,6 +38,7 @@ public class ChatController {
         return ResponseEntity.ok(new ChatResponseDTO(foundChat.get()));
     }
 
+    // Conteúdo de uma conversa entre dois usuários
     @GetMapping("/chat/messages/{user1}/{user2}")
     ResponseEntity<ChatResponseDTO> getChatWithUser(@PathVariable(value = "user1") String user1,
                                                     @PathVariable(value = "user2") String user2) {

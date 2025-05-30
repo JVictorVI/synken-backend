@@ -1,4 +1,4 @@
-package com.faden.synken_backend.chat;
+package com.faden.synken_backend.controllers;
 
 import com.faden.synken_backend.dtos.MessageDTO;
 import com.faden.synken_backend.models.Message;
@@ -15,14 +15,8 @@ public class MessageController {
     @Autowired
     MessageService messageService;
 
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public Message sendMessage(@Payload Message message) {
-        return message;
-    }
-
     @MessageMapping("/chat.sendPrivate")
-    public void sendPrivatePublicMessage(@Payload MessageDTO messageDTO) {
+    public void sendMessage(@Payload MessageDTO messageDTO) {
         messageService.sendPrivateMessage(messageDTO);
     }
 
